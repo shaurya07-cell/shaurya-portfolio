@@ -7,6 +7,11 @@ export interface LeadershipStat {
   accentColor: "pink" | "emerald" | "cyan" | "amber";
 }
 
+export interface CommunityPhoto {
+  src: string;
+  caption: string;
+}
+
 export interface CommunityExperience {
   id: string;
   orderNumber: string;
@@ -19,6 +24,7 @@ export interface CommunityExperience {
   accentColor: "indigo" | "violet" | "pink" | "blue" | "emerald" | "amber" | "cyan";
   iconName: string;
   tags: string[];
+  photos?: CommunityPhoto[];
 }
 
 export const leadershipStats: LeadershipStat[] = [
@@ -82,6 +88,16 @@ export const communityExperiences: CommunityExperience[] = [
     accentColor: "violet",
     iconName: "Users",
     tags: ["Anugoonj 2K26", "Event Planning", "Team Management", "RIT Roorkee"],
+    photos: [
+      {
+        src: "/anugoonj team.jpeg",
+        caption: "Anugoonj 2K26 Core Organizing & Coordination Team at RIT Roorkee",
+      },
+      {
+        src: "/coordinator appreciation anugoonjh.jpeg",
+        caption: "Coordinator Appreciation Certificate for Anugoonj 2K26 execution",
+      },
+    ],
   },
   {
     id: "lead-presentations",
@@ -95,6 +111,12 @@ export const communityExperiences: CommunityExperience[] = [
     accentColor: "pink",
     iconName: "Presentation",
     tags: ["Public Speaking", "10+ Stage Demos", "Concept Breakdown", "Tech Evangelism"],
+    photos: [
+      {
+        src: "/presenting my project in hackathon 2.jpeg",
+        caption: "Presenting system architecture and live project demo on stage",
+      },
+    ],
   },
   {
     id: "lead-bootcamps",
@@ -108,6 +130,16 @@ export const communityExperiences: CommunityExperience[] = [
     accentColor: "blue",
     iconName: "Cpu",
     tags: ["Build with AI", "Hack2Skill", "GDGoC RIT", "AI Enablement"],
+    photos: [
+      {
+        src: "/Build with ai bootcamp team.jpeg",
+        caption: "Build with AI Bootcamp Organizing & Volunteer Team (GDG RIT × Hack2Skill)",
+      },
+      {
+        src: "/gdgrit x hack2skill bootcamp.jpeg",
+        caption: "Guiding student developers through hands-on AI model deployment",
+      },
+    ],
   },
   {
     id: "lead-induction",
@@ -122,6 +154,16 @@ export const communityExperiences: CommunityExperience[] = [
     accentColor: "emerald",
     iconName: "Megaphone",
     tags: ["GDGoC RIT", "PR & Outreach Lead", "600+ Freshers", "Keynote Speaker"],
+    photos: [
+      {
+        src: "/induction photo gdg rit guiding 600+ students.jpeg",
+        caption: "Addressing 600+ freshers on stage during GDG RIT Induction 2026",
+      },
+      {
+        src: "/gdg team present at induction 2026.jpeg",
+        caption: "GDG on Campus RIT Core Team at Induction 2026",
+      },
+    ],
   },
   {
     id: "lead-fetchathon",
@@ -136,6 +178,16 @@ export const communityExperiences: CommunityExperience[] = [
     accentColor: "amber",
     iconName: "Zap",
     tags: ["Fetch-A-Thon 3.0", "Top 24 in India", "Hackathon Coordinator", "Agentic AI"],
+    photos: [
+      {
+        src: "/FETCHAThon-team.jpeg",
+        caption: "Team Fetch-A-Thon 3.0 – National Finalists among Top 24 in India",
+      },
+      {
+        src: "/fetch ai session.jpeg",
+        caption: "Hosting and coordinating the Fetch.ai Agentic AI hackathon session",
+      },
+    ],
   },
   {
     id: "lead-study-jams",
@@ -150,6 +202,12 @@ export const communityExperiences: CommunityExperience[] = [
     accentColor: "cyan",
     iconName: "Cloud",
     tags: ["Google Cloud", "5+ Sessions Conducted", "Skill Labs", "Community Volunteer"],
+    photos: [
+      {
+        src: "/fetch ai session.jpeg",
+        caption: "Conducting interactive technical mentoring session for engineering students",
+      },
+    ],
   },
 ];
 

@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { achievementsData, AchievementItem } from "@/data/achievements";
 import { AchievementBadgeGraphic } from "@/components/ui/AchievementBadgeGraphic";
+import { ImageLightboxModal, LightboxImage } from "@/components/ui/ImageLightboxModal";
 import {
   Trophy,
   Award,
@@ -17,6 +18,7 @@ import {
   Crown,
   Zap,
   ArrowRight,
+  Camera,
 } from "lucide-react";
 
 const filterTabs = [
@@ -29,6 +31,23 @@ const filterTabs = [
 
 export function Achievements() {
   const [activeFilter, setActiveFilter] = useState<string>("All Achievements");
+  const [lightboxState, setLightboxState] = useState<{
+    isOpen: boolean;
+    images: LightboxImage[];
+    currentIndex: number;
+  }>({
+    isOpen: false,
+    images: [],
+    currentIndex: 0,
+  });
+
+  const handleOpenPhotos = (images: LightboxImage[], index: number = 0) => {
+    setLightboxState({
+      isOpen: true,
+      images,
+      currentIndex: index,
+    });
+  };
 
   const filteredAchievements = achievementsData.filter((item) => {
     if (activeFilter === "All Achievements") return true;
@@ -209,6 +228,42 @@ export function Achievements() {
                   <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pt-1">
                     {item.description}
                   </p>
+
+                  {/* Clean Event Photo Preview */}
+                  {item.photos && item.photos.length > 0 && (
+                    <div className="mt-3.5 mb-1">
+                      <div
+                        onClick={() =>
+                          handleOpenPhotos(
+                            item.photos!.map((p) => ({
+                              src: p.src,
+                              caption: p.caption,
+                              title: item.title,
+                              category: item.category,
+                            })),
+                            0
+                          )
+                        }
+                        className="group/photo relative w-full h-36 sm:h-40 rounded-2xl overflow-hidden border border-slate-700/60 dark:border-white/10 bg-slate-900/80 cursor-pointer shadow-md hover:border-amber-400/50 hover:shadow-amber-500/10 transition-all"
+                      >
+                        <img
+                          src={encodeURI(item.photos[0].src)}
+                          alt={item.photos[0].caption || item.title}
+                          className="w-full h-full object-cover object-center group-hover/photo:scale-105 transition-transform duration-500 ease-out"
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent flex items-end justify-between p-3 pointer-events-none">
+                          <span className="text-[11px] font-medium text-slate-200 truncate pr-2">
+                            {item.photos[0].caption}
+                          </span>
+                          <span className="shrink-0 text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-500/90 text-slate-950 font-bold backdrop-blur-sm shadow flex items-center gap-1">
+                            <Camera className="w-3 h-3" />
+                            View Photo
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Bottom Footer Badge */}
@@ -272,6 +327,15 @@ export function Achievements() {
           </div>
         </div>
       </motion.div>
+
+      {/* Lightbox Modal for Photo Preview */}
+      <ImageLightboxModal
+        images={lightboxState.images}
+        currentIndex={lightboxState.currentIndex}
+        isOpen={lightboxState.isOpen}
+        onClose={() => setLightboxState((prev) => ({ ...prev, isOpen: false }))}
+        onNavigate={(idx) => setLightboxState((prev) => ({ ...prev, currentIndex: idx }))}
+      />
     </section>
   );
 }

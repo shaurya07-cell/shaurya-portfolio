@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import {
@@ -8,6 +8,7 @@ import {
   communityExperiences,
   CommunityExperience,
 } from "@/data/community";
+import { ImageLightboxModal, LightboxImage } from "@/components/ui/ImageLightboxModal";
 import {
   Sparkles,
   Users,
@@ -22,6 +23,7 @@ import {
   Award,
   CheckCircle2,
   HeartHandshake,
+  Camera,
 } from "lucide-react";
 
 interface AccentStyleConfig {
@@ -34,6 +36,23 @@ interface AccentStyleConfig {
 
 export function Community() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [lightboxState, setLightboxState] = useState<{
+    isOpen: boolean;
+    images: LightboxImage[];
+    currentIndex: number;
+  }>({
+    isOpen: false,
+    images: [],
+    currentIndex: 0,
+  });
+
+  const handleOpenPhotos = (images: LightboxImage[], index: number = 0) => {
+    setLightboxState({
+      isOpen: true,
+      images,
+      currentIndex: index,
+    });
+  };
 
   // Scroll physics for vertical timeline line
   const { scrollYProgress } = useScroll({
@@ -213,7 +232,7 @@ export function Community() {
                   {/* Left Column */}
                   <div className={isEven ? "flex justify-end" : "text-right pr-4"}>
                     {isEven ? (
-                      <CommunityCard item={item} config={config} align="right" />
+                      <CommunityCard item={item} config={config} align="right" onOpenPhotos={handleOpenPhotos} />
                     ) : (
                       <CommunityMeta item={item} config={config} align="right" />
                     )}
@@ -222,7 +241,7 @@ export function Community() {
                   {/* Right Column */}
                   <div className={!isEven ? "flex justify-start" : "text-left pl-4"}>
                     {!isEven ? (
-                      <CommunityCard item={item} config={config} align="left" />
+                      <CommunityCard item={item} config={config} align="left" onOpenPhotos={handleOpenPhotos} />
                     ) : (
                       <CommunityMeta item={item} config={config} align="left" />
                     )}
@@ -248,13 +267,22 @@ export function Community() {
                     </div>
                   </div>
 
-                  <CommunityCard item={item} config={config} align="left" isMobile={true} />
+                  <CommunityCard item={item} config={config} align="left" isMobile={true} onOpenPhotos={handleOpenPhotos} />
                 </div>
               </motion.div>
             );
           })}
         </div>
       </div>
+
+      {/* Lightbox Modal for Photo Preview */}
+      <ImageLightboxModal
+        images={lightboxState.images}
+        currentIndex={lightboxState.currentIndex}
+        isOpen={lightboxState.isOpen}
+        onClose={() => setLightboxState((prev) => ({ ...prev, isOpen: false }))}
+        onNavigate={(idx) => setLightboxState((prev) => ({ ...prev, currentIndex: idx }))}
+      />
     </section>
   );
 }
@@ -265,11 +293,13 @@ function CommunityCard({
   config,
   align,
   isMobile = false,
+  onOpenPhotos,
 }: {
   item: CommunityExperience;
   config: AccentStyleConfig;
   align: "left" | "right";
   isMobile?: boolean;
+  onOpenPhotos?: (images: LightboxImage[], index: number) => void;
 }) {
   return (
     <div
@@ -317,6 +347,45 @@ function CommunityCard({
       <div className="mt-1 text-sm font-semibold font-mono text-blue-400 dark:text-blue-300">
         {item.role}
       </div>
+
+      {/* Event Photo Preview (Clean & Elegant) */}
+      {item.photos && item.photos.length > 0 && onOpenPhotos && (
+        <div className="mt-3.5 mb-2">
+          <div
+            onClick={() =>
+              onOpenPhotos(
+                item.photos!.map((p) => ({
+                  src: p.src,
+                  caption: p.caption,
+                  title: item.event,
+                  category: item.category,
+                })),
+                0
+              )
+            }
+            className="group/photo relative w-full h-44 sm:h-48 rounded-2xl overflow-hidden border border-slate-700/60 dark:border-white/10 bg-slate-900/80 cursor-pointer shadow-md hover:border-blue-400/50 hover:shadow-blue-500/10 transition-all"
+          >
+            <img
+              src={encodeURI(item.photos[0].src)}
+              alt={item.photos[0].caption || item.event}
+              className="w-full h-full object-cover object-center group-hover/photo:scale-105 transition-transform duration-500 ease-out"
+              loading="lazy"
+            />
+            {/* Gradient Overlay & Badge */}
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent flex flex-col justify-end p-3 pointer-events-none">
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-[11px] font-medium text-slate-200 truncate">
+                  {item.photos[0].caption}
+                </span>
+                <span className="shrink-0 text-[10px] font-mono px-2 py-0.5 rounded-full bg-blue-600/90 text-white font-semibold backdrop-blur-sm shadow flex items-center gap-1">
+                  <Camera className="w-3 h-3" />
+                  {item.photos.length > 1 ? `${item.photos.length} Photos` : "Expand"}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Description */}
       <p className="mt-3 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">

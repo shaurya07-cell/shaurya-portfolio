@@ -13,6 +13,7 @@ export interface AchievementItem {
   accentColor: "gold" | "cyan" | "amber" | "emerald" | "rose" | "purple";
   graphicType: "trophy" | "top24" | "top5" | "top7" | "hackathon" | "controller" | "mvp" | "championship" | "football";
   featured?: boolean;
+  photos?: { src: string; caption: string }[];
 }
 
 export const achievementsData: AchievementItem[] = [
@@ -45,6 +46,12 @@ export const achievementsData: AchievementItem[] = [
     accentColor: "cyan",
     graphicType: "top24",
     featured: true,
+    photos: [
+      {
+        src: "/FETCHAThon-team.jpeg",
+        caption: "Fetch-A-Thon 3.0 National Finalist Team (Top 24 Teams in India)",
+      },
+    ],
   },
   {
     id: "ach-gfg-hacksprint",
@@ -101,6 +108,12 @@ export const achievementsData: AchievementItem[] = [
     badge: "College Winner Trophy",
     accentColor: "gold",
     graphicType: "championship",
+    photos: [
+      {
+        src: "/engineers day winner.jpeg",
+        caption: "Winning 1st Place on Engineers' Day at Roorkee Institute of Technology",
+      },
+    ],
   },
   {
     id: "ach-bgmi-tournament",
@@ -146,5 +159,11 @@ export const achievementsData: AchievementItem[] = [
     accentColor: "emerald",
     graphicType: "football",
     featured: true,
+    photos: [
+      {
+        src: "/sportech winner 2025.jpeg",
+        caption: "Sportec 2K25 Football Champions with the Winning Trophy & Team",
+      },
+    ],
   },
 ];
