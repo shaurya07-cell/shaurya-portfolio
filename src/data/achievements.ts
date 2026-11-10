@@ -6,12 +6,12 @@ export interface AchievementItem {
   date: string;
   organization?: string;
   description: string;
-  category: "Hackathons" | "Gaming & Esports" | "College Recognition";
+  category: "Hackathons" | "Gaming & Esports" | "College Recognition" | "Sports & Athletics";
   categories: string[];
   badge: string;
   prizePool?: string;
   accentColor: "gold" | "cyan" | "amber" | "emerald" | "rose" | "purple";
-  graphicType: "trophy" | "top24" | "top5" | "top7" | "hackathon" | "controller" | "mvp" | "championship";
+  graphicType: "trophy" | "top24" | "top5" | "top7" | "hackathon" | "controller" | "mvp" | "championship" | "football";
   featured?: boolean;
 }
 
@@ -131,5 +131,20 @@ export const achievementsData: AchievementItem[] = [
     badge: "Most Valuable Player (MVP)",
     accentColor: "purple",
     graphicType: "mvp",
+  },
+  {
+    id: "ach-sportec-football",
+    orderNumber: "09",
+    title: "Sportec 2K25 – Inter-College Football Tournament",
+    achievement: "Tournament Champions (Goalkeeper)",
+    date: "2025",
+    organization: "Sportec 2K25 (Inter-Collegiate Sports Fest)",
+    description: "Crowned Champions of Sportec 2K25 in football, competing against top visiting college teams from across the region. Defended the net as starting goalkeeper with crucial saves, clean sheets, and defensive composure under high pressure.",
+    category: "Sports & Athletics",
+    categories: ["Sports & Athletics", "College Recognition"],
+    badge: "Tournament Champions (Goalkeeper)",
+    accentColor: "emerald",
+    graphicType: "football",
+    featured: true,
   },
 ];

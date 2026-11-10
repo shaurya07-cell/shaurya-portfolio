@@ -22,6 +22,7 @@ import {
 const filterTabs = [
   "All Achievements",
   "Hackathons",
+  "Sports & Athletics",
   "Gaming & Esports",
   "College Recognition",
 ];

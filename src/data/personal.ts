@@ -122,7 +122,7 @@ export const personalData: PersonalInfo = {
     },
     {
       label: "Hackathons & Events",
-      value: 8,
+      value: 9,
       suffix: "+",
       description: "Competitions participated, won and organized",
     },

@@ -27,6 +27,7 @@ Hi there! I'm **Shaurya Hindocha**, a Computer Science and Engineering student s
 
 - 🚀 **Full-Stack Developer** & **AI/ML Builder** exploring Agentic AI, LLMs, and intelligent document processing.
 - 🏆 **Hackathon Winner** (Flora AI) and Top 24 Finalist at **Fetch-A-Thon 3.0** (Fetch.ai Agentic AI).
+- ⚽ **Tournament Champion (Goalkeeper)** at **Sportec 2K25** Inter-College Football Championship.
 - 🤝 **Community Volunteer & Leader** with GDG on Campus RIT Roorkee and Inkspire Club.
 - 🎤 Delivered **10+ technical presentations & project demos** on stage.
 
