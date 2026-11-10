@@ -148,13 +148,13 @@ export function Hero({ onOpenResume }: HeroProps) {
       {/* Background Interactive Particle Canvas */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 pointer-events-none z-0 opacity-70"
+        className="absolute inset-0 pointer-events-none z-0 opacity-70 w-full max-w-full"
       />
 
       {/* Radial Gradient Glow background orbs */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-blue-600/20 via-purple-600/20 to-pink-600/10 rounded-full blur-[140px] pointer-events-none z-0" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] max-w-[95vw] h-[600px] max-h-[95vw] bg-gradient-to-tr from-blue-600/20 via-purple-600/20 to-pink-600/10 rounded-full blur-[140px] pointer-events-none z-0" />
 
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center w-full">
         {/* Availability Badge */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -172,9 +172,9 @@ export function Hero({ onOpenResume }: HeroProps) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-heading font-extrabold text-slate-900 dark:text-white tracking-tight leading-none mb-4">
-            Hello, I'm{" "}
-            <span className="text-gradient hover:opacity-90 transition-opacity">
+          <h1 className="text-3xl sm:text-5xl md:text-7xl font-heading font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight mb-4 break-words">
+            Hello, I&apos;m{" "}
+            <span className="text-gradient hover:opacity-90 transition-opacity block sm:inline">
               {personalData.name}
             </span>
           </h1>
@@ -222,11 +222,11 @@ export function Hero({ onOpenResume }: HeroProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="flex flex-wrap items-center justify-center gap-4"
+          className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 max-w-full"
         >
           <a
             href="#projects"
-            className="group flex items-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white font-semibold text-sm shadow-xl shadow-blue-500/25 hover:scale-105 active:scale-95 transition-all"
+            className="group flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 rounded-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white font-semibold text-xs sm:text-sm shadow-xl shadow-blue-500/25 hover:scale-105 active:scale-95 transition-all"
           >
             <span>Explore My Work</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -236,25 +236,27 @@ export function Hero({ onOpenResume }: HeroProps) {
             href={personalData.resumeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-6 py-3.5 rounded-full glass-panel border border-slate-700 dark:border-white/10 text-slate-800 dark:text-white font-semibold text-sm hover:bg-slate-800/20 dark:hover:bg-white/10 hover:scale-105 active:scale-95 transition-all"
+            className="flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 rounded-full glass-panel border border-slate-700 dark:border-white/10 text-slate-800 dark:text-white font-semibold text-xs sm:text-sm hover:bg-slate-800/20 dark:hover:bg-white/10 hover:scale-105 active:scale-95 transition-all"
           >
             <FileText className="w-4 h-4 text-purple-400" />
             <span>Resume (PDF)</span>
           </a>
 
-          {personalData.socialLinks.map((social) => (
-            <a
-              key={social.id}
-              href={social.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={social.name}
-              title={social.name}
-              className="p-3.5 rounded-full glass-panel border border-slate-700 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:text-white hover:border-blue-400 hover:scale-110 active:scale-95 transition-all"
-            >
-              <SocialIcon iconName={social.iconName} className="w-5 h-5" />
-            </a>
-          ))}
+          <div className="flex items-center gap-2 sm:gap-3">
+            {personalData.socialLinks.map((social) => (
+              <a
+                key={social.id}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.name}
+                title={social.name}
+                className="p-3 sm:p-3.5 rounded-full glass-panel border border-slate-700 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:text-white hover:border-blue-400 hover:scale-110 active:scale-95 transition-all"
+              >
+                <SocialIcon iconName={social.iconName} className="w-4 sm:w-5 h-4 sm:h-5" />
+              </a>
+            ))}
+          </div>
         </motion.div>
 
         {/* Location & Quick Specs Footer */}

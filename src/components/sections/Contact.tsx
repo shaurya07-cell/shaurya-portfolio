@@ -122,7 +122,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-20 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
       <SectionHeading
         badge="Get in Touch"
         title="Let's Build Something Amazing Together"

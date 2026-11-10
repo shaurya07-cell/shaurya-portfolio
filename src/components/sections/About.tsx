@@ -52,7 +52,7 @@ export function About() {
   ];
 
   return (
-    <section id="about" className="py-20 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="about" className="py-20 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
       <SectionHeading
         badge="About Me"
         title="Engineering Solutions with Passion & Precision"

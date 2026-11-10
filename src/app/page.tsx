@@ -20,7 +20,7 @@ export default function Home() {
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
 
   return (
-    <div className="relative">
+    <div className="relative w-full max-w-full overflow-x-clip">
       <Hero />
       <About />
       <StatsCounter />

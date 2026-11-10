@@ -26,7 +26,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <ScrollProgress />
       <Navbar onOpenResume={handleOpenResume} />
       <CommandPalette onOpenResume={handleOpenResume} />
-      <main>{children}</main>
+      <main className="w-full max-w-full overflow-x-clip">{children}</main>
       <Footer />
 
       {/* Global Interactive Resume Modal */}

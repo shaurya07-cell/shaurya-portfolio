@@ -152,7 +152,7 @@ export function Community() {
   };
 
   return (
-    <section id="community" className="py-24 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="community" className="py-24 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
       {/* Background Ambient Orbs */}
       <div className="absolute top-1/4 -right-32 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/3 -left-32 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />

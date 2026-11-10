@@ -16,7 +16,7 @@ export function SectionHeading({
   center = true,
 }: SectionHeadingProps) {
   return (
-    <div className={`mb-12 ${center ? "text-center" : "text-left"}`}>
+    <div className={`mb-12 ${center ? "text-center" : "text-left"} max-w-full px-2`}>
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -33,7 +33,7 @@ export function SectionHeading({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.1 }}
-        className="text-3xl md:text-5xl font-heading font-bold text-slate-900 dark:text-white tracking-tight"
+        className="text-2xl sm:text-3xl md:text-5xl font-heading font-bold text-slate-900 dark:text-white tracking-tight break-words"
       >
         {title}
       </motion.h2>

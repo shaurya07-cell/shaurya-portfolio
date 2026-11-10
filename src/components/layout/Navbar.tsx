@@ -59,20 +59,20 @@ export function Navbar({ onOpenResume }: NavbarProps) {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 w-full max-w-full transition-all duration-300 ${
         scrolled
           ? "py-3 glass-panel border-b border-slate-800/80 dark:border-white/10 shadow-lg"
           : "py-5 bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between w-full">
         {/* Brand Initials Logo */}
         <a
           href="#hero"
           onClick={(e) => scrollToSection(e, "#hero")}
-          className="flex items-center gap-2 group"
+          className="flex items-center gap-2 group shrink-0"
         >
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-purple-600 to-pink-600 p-[1px] shadow-lg group-hover:scale-105 transition-transform">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-purple-600 to-pink-600 p-[1px] shadow-lg group-hover:scale-105 transition-transform shrink-0">
             <div className="w-full h-full bg-[#050609] dark:bg-[#07090e] rounded-[11px] flex items-center justify-center font-heading font-bold text-white text-sm tracking-wider">
               {personalData.initials}
             </div>

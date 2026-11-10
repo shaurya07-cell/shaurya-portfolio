@@ -7,7 +7,7 @@ import { GraduationCap, Award, MapPin, Calendar, CheckCircle2 } from "lucide-rea
 
 export function Education() {
   return (
-    <section id="education" className="py-20 relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
+    <section id="education" className="py-20 relative z-10 max-w-6xl mx-auto px-4 sm:px-6 overflow-hidden">
       <SectionHeading
         badge="Academic Foundation"
         title="Education & Honors"

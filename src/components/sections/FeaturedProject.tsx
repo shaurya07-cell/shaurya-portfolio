@@ -14,7 +14,7 @@ export function FeaturedProject({ onOpenModal }: FeaturedProjectProps) {
   const featured = projectsData.find((p) => p.featured) || projectsData[0];
 
   return (
-    <section className="py-16 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-16 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="relative rounded-3xl glass-panel border border-cyan-500/30 p-6 sm:p-10 lg:p-12 overflow-hidden bg-gradient-to-br from-cyan-950/25 via-slate-900/80 to-blue-950/30 shadow-2xl">
         {/* Ambient Gradient Orbs */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-600/10 rounded-full blur-3xl pointer-events-none" />

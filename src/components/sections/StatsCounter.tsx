@@ -56,7 +56,7 @@ function CounterItem({
 
 export function StatsCounter() {
   return (
-    <section className="py-16 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-16 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
         {personalData.stats.map((stat, idx) => (
           <CounterItem
