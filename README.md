@@ -60,9 +60,9 @@ Hi there! I'm **Shaurya Hindocha**, a Computer Science and Engineering student s
 
 | Project | Category | Key Highlights | Tech Stack |
 | :--- | :--- | :--- | :--- |
-| **[Sentinel-AI](#)** | AI / Cybersecurity | Autonomous cyber reasoning, AST static analysis, automated remediation verification | Python, FastAPI, React, TS, Gemini API |
-| **[Flora AI](#)** | AI / Document Intelligence | Hackathon-winning product intelligence platform extracting data from PDFs, images & sheets | Python, React, Tailwind, MongoDB, Gemini API, OCR |
-| **[EaseAttend](#)** | Smart Attendance Solution | Top 5 GFG HackSprint finalist; real-time attendance management & role-based dashboard | React, Node.js, Express, MongoDB, Tailwind |
+| **[Sentinel-AI](https://github.com/shaurya07-cell/Sentinel-ai)** | AI / Cybersecurity | Autonomous cyber reasoning, AST static analysis, automated remediation verification | Python, FastAPI, React, TS, Gemini API |
+| **[Flora AI](https://github.com/shaurya07-cell/flora-ai-platform)** | AI / Document Intelligence | Hackathon-winning product intelligence platform extracting data from PDFs, images & sheets | Python, React, Tailwind, MongoDB, Gemini API, OCR |
+| **[EaseAttend](https://github.com/shaurya07-cell/Easeattend)** | Smart Attendance Solution | Top 5 GFG HackSprint finalist; real-time attendance management & role-based dashboard | React, Node.js, Express, MongoDB, Tailwind |
 | **[ExplainMe](#)** | Developer AI Tool | Complex codebase and architecture diagram explainer with interactive breakdown | React, Tailwind, Gemini API, AST |
 | **[MediPlus](#)** | Healthcare Web Platform | Patient records, appointment scheduling, and automated medical reports | React, Node.js, Express, MongoDB |
 

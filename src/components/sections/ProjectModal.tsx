@@ -201,7 +201,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                   className="flex items-center gap-2 px-5 py-2.5 rounded-xl glass-panel border border-slate-700 dark:border-white/10 text-xs font-bold text-slate-200 hover:text-white hover:border-slate-500 transition-all"
                 >
                   <Github className="w-4 h-4" />
-                  <span>GitHub Profile</span>
+                  <span>View Repository</span>
                 </a>
               )}
             </div>

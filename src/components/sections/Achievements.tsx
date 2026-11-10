@@ -19,6 +19,7 @@ import {
   Zap,
   ArrowRight,
   Camera,
+  Github,
 } from "lucide-react";
 
 const filterTabs = [
@@ -272,11 +273,26 @@ export function Achievements() {
                     <Sparkles className="w-3.5 h-3.5 text-amber-400" />
                     {item.badge}
                   </span>
-                  {item.organization && (
-                    <span className="text-[10px] text-slate-400 uppercase tracking-wider">
-                      {item.organization}
-                    </span>
-                  )}
+                  <div className="flex items-center gap-2">
+                    {item.githubUrl && (
+                      <a
+                        href={item.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/60 transition-all text-[10px]"
+                        title="View GitHub Repository"
+                      >
+                        <Github className="w-3 h-3" />
+                        <span>Code</span>
+                      </a>
+                    )}
+                    {item.organization && (
+                      <span className="text-[10px] text-slate-400 uppercase tracking-wider">
+                        {item.organization}
+                      </span>
+                    )}
+                  </div>
                 </div>
               </motion.div>
             );

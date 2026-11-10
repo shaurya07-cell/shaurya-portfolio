@@ -15,6 +15,7 @@ import {
   ExternalLink,
   Code2,
   Cpu,
+  Github,
 } from "lucide-react";
 
 export function Experience() {
@@ -206,6 +207,22 @@ export function Experience() {
                       ))}
                     </div>
                   </div>
+
+                  {/* Project Repository Link */}
+                  {exp.projectUrl && (
+                    <div className="pt-2 border-t border-slate-800/80 dark:border-white/10 flex justify-end">
+                      <a
+                        href={exp.projectUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono font-semibold bg-emerald-500/10 text-emerald-300 border border-emerald-500/25 hover:bg-emerald-500/20 hover:border-emerald-500/40 transition-all shadow-sm"
+                      >
+                        <Github className="w-3.5 h-3.5" />
+                        <span>View Repository</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    </div>
+                  )}
                 </div>
               </div>
             </motion.div>

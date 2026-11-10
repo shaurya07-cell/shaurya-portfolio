@@ -39,6 +39,7 @@ export const experienceData: ExperienceItem[] = [
     technologies: ["Python", "React.js", "Tailwind CSS", "MongoDB", "Gemini API", "OCR"],
     highlightBadge: "First Hackathon Victory",
     isSpecialHighlight: true,
+    projectUrl: "https://github.com/shaurya07-cell/flora-ai-platform",
     accentColor: "emerald",
     iconName: "Award",
   },

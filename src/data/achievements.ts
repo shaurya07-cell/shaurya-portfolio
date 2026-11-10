@@ -14,6 +14,7 @@ export interface AchievementItem {
   graphicType: "trophy" | "top24" | "top5" | "top7" | "hackathon" | "controller" | "mvp" | "championship" | "football";
   featured?: boolean;
   photos?: { src: string; caption: string }[];
+  githubUrl?: string;
 }
 
 export const achievementsData: AchievementItem[] = [
@@ -31,6 +32,7 @@ export const achievementsData: AchievementItem[] = [
     accentColor: "gold",
     graphicType: "trophy",
     featured: true,
+    githubUrl: "https://github.com/shaurya07-cell/flora-ai-platform",
   },
   {
     id: "ach-fetchathon",
@@ -66,6 +68,7 @@ export const achievementsData: AchievementItem[] = [
     badge: "Top 5 Finalist Medal",
     accentColor: "amber",
     graphicType: "top5",
+    githubUrl: "https://github.com/shaurya07-cell/Easeattend",
   },
   {
     id: "ach-stop-food-waste",
