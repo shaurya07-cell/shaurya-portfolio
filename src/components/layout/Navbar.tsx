@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { AdminPasswordModal } from "@/components/admin/AdminPasswordModal";
 import { personalData } from "@/data/personal";
 import { Menu, X, FileText, Sparkles } from "lucide-react";
 
@@ -25,6 +26,43 @@ export function Navbar({ onOpenResume }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [logoClicks, setLogoClicks] = useState(0);
+  const [isAdminModalOpen, setIsAdminModalOpen] = useState(false);
+  const clickTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (clickTimeoutRef.current) clearTimeout(clickTimeoutRef.current);
+    };
+  }, []);
+
+  const handleLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setLogoClicks((prev) => {
+      const nextCount = prev + 1;
+      if (clickTimeoutRef.current) clearTimeout(clickTimeoutRef.current);
+
+      if (nextCount >= 5) {
+        setIsAdminModalOpen(true);
+        return 0;
+      }
+
+      // Reset count after 2.5s of inactivity
+      clickTimeoutRef.current = setTimeout(() => {
+        setLogoClicks(0);
+      }, 2500);
+
+      // On 1st click, still perform regular smooth scroll to hero
+      if (nextCount === 1) {
+        const heroElem = document.getElementById("hero");
+        if (heroElem) {
+          heroElem.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+
+      return nextCount;
+    });
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,21 +104,27 @@ export function Navbar({ onOpenResume }: NavbarProps) {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between w-full">
-        {/* Brand Initials Logo */}
-        <a
-          href="#hero"
-          onClick={(e) => scrollToSection(e, "#hero")}
-          className="flex items-center gap-2 group shrink-0"
-        >
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-purple-600 to-pink-600 p-[1px] shadow-lg group-hover:scale-105 transition-transform shrink-0">
-            <div className="w-full h-full bg-[#050609] dark:bg-[#07090e] rounded-[11px] flex items-center justify-center font-heading font-bold text-white text-sm tracking-wider">
-              {personalData.initials}
+        {/* Brand Initials Logo with Secret 5-Click Admin Trigger */}
+        <div className="flex items-center gap-2 shrink-0">
+          <div
+            onClick={handleLogoClick}
+            className="flex items-center gap-2 group cursor-pointer select-none"
+            title="Shaurya Hindocha"
+          >
+            <div
+              className={`w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-purple-600 to-pink-600 p-[1px] shadow-lg group-hover:scale-105 transition-all shrink-0 ${
+                logoClicks >= 3 ? "scale-110 ring-2 ring-purple-400 animate-pulse" : ""
+              }`}
+            >
+              <div className="w-full h-full bg-[#050609] dark:bg-[#07090e] rounded-[11px] flex items-center justify-center font-heading font-bold text-white text-sm tracking-wider">
+                {personalData.initials}
+              </div>
             </div>
+            <span className="font-heading font-bold text-lg text-slate-900 dark:text-white group-hover:text-blue-400 transition-colors hidden sm:block">
+              {personalData.name}
+            </span>
           </div>
-          <span className="font-heading font-bold text-lg text-slate-900 dark:text-white group-hover:text-blue-400 transition-colors hidden sm:block">
-            {personalData.name}
-          </span>
-        </a>
+        </div>
 
         {/* Desktop Nav Links */}
         <nav className="hidden lg:flex items-center gap-1 glass-panel px-4 py-1.5 rounded-full border border-slate-700/40 dark:border-white/10">
@@ -171,6 +215,12 @@ export function Navbar({ onOpenResume }: NavbarProps) {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Secret 5-Click Admin Password Popup */}
+      <AdminPasswordModal
+        isOpen={isAdminModalOpen}
+        onClose={() => setIsAdminModalOpen(false)}
+      />
     </header>
   );
 }

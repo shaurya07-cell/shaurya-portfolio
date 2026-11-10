@@ -88,6 +88,25 @@ export function Contact() {
           setIsSubmitting(false);
           setSubmitted(true);
 
+          // Associate visitor name with analytics profile
+          try {
+            localStorage.setItem("portfolio_visitor_name", formData.name);
+            const vid = localStorage.getItem("shaurya_vid");
+            if (vid) {
+              fetch("/api/analytics", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  action: "identify",
+                  visitorId: vid,
+                  name: formData.name,
+                }),
+              }).catch(() => {});
+            }
+          } catch {
+            // ignore
+          }
+
           try {
             confetti({
               particleCount: 80,
