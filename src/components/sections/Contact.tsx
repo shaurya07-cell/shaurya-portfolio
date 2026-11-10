@@ -31,6 +31,7 @@ export function Contact() {
   const [copied, setCopied] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(personalData.email);
@@ -52,29 +53,72 @@ export function Contact() {
     return valid;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
     if (!validate()) return;
 
     setIsSubmitting(true);
+    setErrorMessage("");
 
-    // Simulate API form submission
-    setTimeout(() => {
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "";
+
+    // If an access key is configured, submit via Web3Forms
+    if (accessKey && accessKey.trim() !== "") {
+      try {
+        const response = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            access_key: accessKey.trim(),
+            name: formData.name,
+            email: formData.email,
+            subject: formData.subject || `Portfolio Contact Message from ${formData.name}`,
+            message: formData.message,
+            from_name: "Portfolio Visitor",
+          }),
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          setIsSubmitting(false);
+          setSubmitted(true);
+
+          try {
+            confetti({
+              particleCount: 80,
+              spread: 70,
+              origin: { y: 0.6 },
+            });
+          } catch {
+            // graceful fallback
+          }
+          return;
+        } else {
+          setErrorMessage(result.message || "Unable to send message via Web3Forms.");
+        }
+      } catch (err) {
+        setErrorMessage("Network connection error. You can also email directly below.");
+      }
+    } else {
+      // Smooth fallback to direct mailto if access key is not yet provided
+      const mailtoUrl = `mailto:${personalData.email}?subject=${encodeURIComponent(
+        formData.subject || `Portfolio Contact from ${formData.name}`
+      )}&body=${encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+      )}`;
+      window.location.href = mailtoUrl;
+
       setIsSubmitting(false);
       setSubmitted(true);
+      return;
+    }
 
-      // Trigger celebration confetti
-      try {
-        confetti({
-          particleCount: 80,
-          spread: 70,
-          origin: { y: 0.6 },
-        });
-      } catch (err) {
-        // Fallback gracefully
-      }
-    }, 1200);
+    setIsSubmitting(false);
   };
 
   return (
@@ -260,6 +304,12 @@ export function Contact() {
                     className="w-full px-4 py-3 rounded-xl glass-panel border border-slate-700/60 dark:border-white/10 bg-slate-900/50 dark:bg-black/40 text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 text-sm font-medium resize-none"
                   />
                 </div>
+
+                {errorMessage && (
+                  <div className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs font-mono">
+                    {errorMessage}
+                  </div>
+                )}
 
                 <button
                   type="submit"
